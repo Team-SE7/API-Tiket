@@ -1,12 +1,20 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 const joi = require('joi')
+const fs = require('fs')
+var cors = require('cors')
+const path = require('path')
 
+app.use(cors())
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(fileUpload())
+
 // Data
 let movies = [
 		{
